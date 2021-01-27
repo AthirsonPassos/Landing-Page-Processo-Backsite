@@ -1,0 +1,27 @@
+.titulo {
+    color: rgb(8, 10, 139);
+}
+
+.cor-especial{
+    color: rgb(255, 255, 255);
+    font-style: normal;
+    font-weight: 1600px;
+}
+
+.testando{
+    background-color: rgb(16, 5, 117);
+}
+
+.livro{
+    width: 500px;
+}
+
+.texto-maior{
+    color: rgb(0, 0, 0);
+    margin-right: 100px;
+}
+
+.texto-menor{
+    margin-right: 100px;
+}
+

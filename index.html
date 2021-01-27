@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Athirson Passos">
+    <title>E-book Setup Social</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!-- Adicionando Javascript -->
+    <script>
+    
+        function limpa_formulário_cep() {
+                //Limpa valores do formulário de cep.
+                document.getElementById('rua').value=("");
+                document.getElementById('bairro').value=("");
+                document.getElementById('cidade').value=("");
+                document.getElementById('uf').value=("");
+        }
+    
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('rua').value=(conteudo.logradouro);
+                document.getElementById('bairro').value=(conteudo.bairro);
+                document.getElementById('cidade').value=(conteudo.localidade);
+                document.getElementById('uf').value=(conteudo.uf);
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+            
+        function pesquisacep(valor) {
+    
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+    
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+    
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+    
+                //Valida o formato do CEP.
+                if(validacep.test(cep)) {
+    
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('rua').value="...";
+                    document.getElementById('bairro').value="...";
+                    document.getElementById('cidade').value="...";
+                    document.getElementById('uf').value="...";
+    
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+    
+                    //Sincroniza com o callback.
+                    script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+    
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+    
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        };
+    
+        </script>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid  testando">
+            <!--Logo para acesso do site principal da empresa-->
+            <a class="navbar-brand" href="https://www.backsite.com.br/onepage/">
+                <img src="Imagens/logo.png" class="h-50" alt="Backsite" title="logo"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <!--Links diversos para acesso de outras partes do site da empresa-->
+                <div class="navbar-nav">
+                    <a class="nav-link active text-light" aria-current="page" href="https://www.backsite.com.br/onepage/">Home</a>
+                    <a class="nav-link text-light" href="https://www.backsite.com.br/onepage/o-backsite">Sobre</a>
+                    <a class="nav-link text-light" href="https://www.backsite.com.br/orcamento">Vendas</a>
+                    <a class="nav-link text-light" href="https://www.backsite.com.br/privilegios/nucleo/redesocial/login">Já sou cliente!</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <!--Logo para acesso do site principal da empresa 
+    
+
+    <p><a href=https://www.backsite.com.br/onepage/>
+        
+    </a> </p>-->
+
+
+    <h1 class="text-center titulo pt-4">E-book Setup Social</h1>
+    <h2 class="text-center text-secondary pt-2">Este e-book possui o passo a passo para a criação das contas nas principais redes sociais do momento.</h2>
+    
+    <img class="livro rounded float-start img-fluid" src="Imagens/livro.jpg" alt="Setup Social" title="setupsocial" />
+
+    <h1 class="text-end texto-maior pt-4 fs-4">Dicas valiosas na criação das contas</h1>
+    <h2 class="text-end texto-menor text-secondary pt-2 fs-5">Reunimos aqui dicas de configuração, identidade visual, qual mídia social combina com a sua organização e muito mais.</h2>
+    <br>
+    <h1 class="text-end texto-maior pt-4 fs-4">Conhecimento</h1>
+    <h2 class="text-end texto-menor text-secondary pt-2 fs-5">O Setup de Mídias Digitais também aborda histórias das rede sociais: Facebook, Youtube, Instagram e Twitter.</h2>
+    <br>
+    <h1 class="text-end texto-maior pt-4 fs-4">Interativo</h1>
+    <h2 class="text-end texto-menor text-secondary pt-2 fs-5">Você pode nos enviar sugestões, críticas, elogios e dúvidas através do e-mail: marketing@backsite.com.br</h2>
+
+    <!--Formulário para captura de informações-->
+
+    <form class="row g-3 needs-validation container-fluid" novalidate method="get" action=".">
+        <div class="col-md-6">
+            <label for="validationCustom01" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="validationCustom01"  required>
+            <div class="valid-feedback">
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <label for="validationCustom02" class="form-label">Idade</label>
+            <input type="text" class="form-control" id="validationCustom02" required>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        </div>
+        
+        <div class="col-md-4">
+            <label for="validationCustom02e" class="form-label">Telefone</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text" id="validationCustom02">+55</span>
+              <input type="number" class="form-control" required>
+              <div class="invalid-feedback">
+              </div>
+            </div>
+          </div>
+
+        <!--Validação CEP-->
+        <div class="col-md-2">
+          <label for="validationCustom03" class="form-label">CEP</label>
+          <input name="cep" type="text" class="form-control" id="cep" required onblur="pesquisacep(this.value);" />
+          <div class="invalid-feedback">
+                Por favor, forneça um CEP válido...
+          </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom03" class="form-label">Endereço</label>
+            <input name="rua" type="text" class="form-control" id="rua" />
+            <div class="invalid-feedback">
+            </div>
+        </div>
+        <div class="col-md-1">
+            <label for="validationCustom02" class="form-label">Número</label>
+            <input type="text" class="form-control" id="validationCustom02" required>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        </div>
+        <div class="col-md-3">
+            <label for="validationCustom03" class="form-label">Bairro</label>
+            <input name="bairro" type="text" class="form-control" id="bairro" />
+            <div class="invalid-feedback">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom03" class="form-label">Cidade</label>
+            <input name="cidade" type="text" class="form-control" id="cidade" />
+            <div class="invalid-feedback">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="validationCustom03" class="form-label">Estado</label>
+            <input name="uf" type="text" class="form-control" id="uf" />
+            <div class="invalid-feedback">
+            </div>
+        </div>
+
+
+               
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+            <label class="form-check-label" for="invalidCheck">
+              Concordo em fornecer as informações acima!
+            </label>
+            <div class="invalid-feedback">
+              Termo de aceite não selecionado.
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Baixar o E-book</button>
+        </div>
+      </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
